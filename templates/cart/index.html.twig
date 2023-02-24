@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+{% if cart|length > 0 %}
+        <a href="{{ path('delete_all_cart') }}">Vider le panier</a>
+        {% set total = null %}
+        {% for item in cart %}
+        {% set total = total + (item.product.price * item.quantity) %}
+            
+        <p>{{ item.product.picture }}</p>
+            <p>description : {{ item.product.description }}</p>
+            
+            <p>prix : {{ (item.product.price * item.quantity)|number_format(2, ',' , '.') }} €</p>
+            
+            <a href="{{ path('decrease_cart', {'id': item.product.id }) }}" >-</a>
+            <p>quantity : {{ item.quantity }}</p>
+            <a href="{{ path('post_cart', {'id': item.product.id }) }}" >+</a>
+            <a href="{{ path('delete_cart', {'id': item.product.id }) }}" >Retirer le produit</a>
+        {% endfor %}
+        Nombre de produit : {{ cart|length }}
+        <p>Prix total : {{ (total)|number_format(2, ',' , '.') }} €</p>
+    {% else %}
+    <p>
+        VOTRE PANIER EST VIDE !
+    </p>
+    {% endif %}
+        
+{% endblock %}

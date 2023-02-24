@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+{% for item in products %}
+<div class="card" style="width: 18rem;">
+    <p class="card-text">{{ item.name }}</p>
+    <p class="card-text">{{ item.description }}</p>
+    <p class="card-text">{{ item.price }}</p> 
+    <img src="{{ item.picture}}" class="card-img-top" alt="..." width="200">
+    <a href="{{ path('post_cart', {'id': item.id } ) }}">
+    <p>Ajouter au panier</p>
+     </a>
+    </div>
+</div> 
+{% endfor %}
+{% endblock %}
